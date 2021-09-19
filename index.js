@@ -7,19 +7,34 @@ fs.readFile("./www/index.html", "UTF-8", (err, file) => {
   if (err) {
     console.log("ファイルの読み込みでエラーが発生しました\n" + err);
   } else {
-    const server = http.createServer((req, res) => {
-      res.writeHead(200, {
-        "Content-Type": "text/html; charset=utf-8",
+    const server = http
+      .createServer((req, res) => {
+        console.info(
+          "[" +
+            new Date() +
+            "] Requested by " +
+            req.socket.remoteAddress +
+            req.headers["user-agent"]
+        );
+
+        res.writeHead(200, {
+          "Content-Type": "text/html; charset=utf-8",
+        });
+        res.write(file);
+
+        res.end();
+      })
+      .on("error", (e) => {
+        console.error("[" + new Date() + "] Server Error", e);
+      })
+      .on("clientError", (e) => {
+        console.error("[" + new Date() + "] Client Error", e);
       });
-      res.write(file);
-      console.log("access from  " + req.headers["user-agent"]);
-      res.end();
-    });
 
     // listen
     const port = 8000;
     server.listen(port, () => {
-      console.log("listening on..." + port);
+      console.info("[" + new Date() + "] listening on..." + port);
     });
   }
 });
