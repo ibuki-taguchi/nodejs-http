@@ -1,3 +1,7 @@
+//! sever
+// ⬢ pure-plains-65145
+// https://pure-plains-65145.herokuapp.com/ | https://git.heroku.com/pure-plains-65145.git
+
 "use strict";
 const http = require("http");
 const pug = require("pug");
@@ -12,11 +16,8 @@ const qs = require("querystring");
 //// } else {
 const server = http
   .createServer((req, res) => {
-    const now = new Date();
     console.info(
-      "[" +
-        now +
-        "] Requested by " +
+      "Requested by " +
         req.socket.remoteAddress +
         " " +
         req.url +
@@ -88,9 +89,7 @@ const server = http
             //// const decoded = decodeURIComponent(rawData);
             const answer = qs.parse(rawData);
             console.info(
-              "[" +
-                now +
-                "] 投稿: " +
+              "投稿: " +
                 " name = " +
                 answer["name"] +
                 " => " +
