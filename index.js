@@ -18,6 +18,9 @@ const server = http
         now +
         "] Requested by " +
         req.socket.remoteAddress +
+        " " +
+        req.url +
+        " user-agent : " +
         req.headers["user-agent"]
     );
 
@@ -120,7 +123,7 @@ const server = http
   });
 
 // listen
-const port = 8000;
+const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.info("[" + new Date() + "] listening on..." + port);
 });
