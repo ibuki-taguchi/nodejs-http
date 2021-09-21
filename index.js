@@ -93,7 +93,7 @@ const server = http
                 " name = " +
                 answer["name"] +
                 " => " +
-                answer["yaki-shabu"]
+                answer["favorite"]
             );
             res.write(
               '<!DOCTYPE html><html lang="ja"><body><h1>' +
